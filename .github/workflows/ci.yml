@@ -12,30 +12,22 @@ on:
 
 jobs:
   ci:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04  # Version fixe d'Ubuntu
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
         node: [lts/*]
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v4  # Version stable
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v3.0.0
+        uses: actions/setup-node@v4  # Dernière version
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
-
-      - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.7
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'npm'  # Activation du cache npm intégré
 
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
