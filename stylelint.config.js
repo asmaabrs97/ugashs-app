@@ -1,15 +1,12 @@
 module.exports = {
-  customSyntax: 'postcss-html',
   extends: [
     'stylelint-config-standard',
     'stylelint-config-recommended-vue',
     'stylelint-config-prettier'
   ],
   rules: {
-    // Désactivez explicitement les règles problématiques
     'media-query-no-invalid': null,
     'selector-anb-no-unmatchable': null,
-    // Ajoutez d'autres règles si nécessaire
     'no-descending-specificity': null,
     'at-rule-no-unknown': [
       true,
@@ -19,10 +16,22 @@ module.exports = {
           'apply',
           'variants',
           'responsive',
-          'screen'
+          'screen',
+          'layer'
         ]
       }
-    ]
+    ],
+    'declaration-block-trailing-semicolon': null,
+    'no-invalid-position-at-import-rule': null,
+    'import-notation': null,
+    'function-no-unknown': [
+      true,
+      {
+        ignoreFunctions: ['theme']
+      }
+    ],
+    'selector-class-pattern': null,
+    'custom-property-pattern': null
   },
   overrides: [
     {
